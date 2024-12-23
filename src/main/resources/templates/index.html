@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonbin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #121212;
+            color: #eaeaea;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        label {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(106, 17, 203, 0.8);
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease; /* Adiciona uma transição suave na cor de fundo */
+        }
+
+        button:hover {
+            background-color: rgb(106, 17, 203);
+        }
+        .link-container {
+            margin-top: 20px;
+        }
+
+        .link-container a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            label, input, textarea, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Anonbin</h1>
+    <form action="#" th:action="@{/create}" method="post">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter the title" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="8" placeholder="Enter your bin content" required></textarea>
+
+        <label for="password">Password (Optional)</label>
+        <input type="password" id="password" name="password" placeholder="Enter a password (optional)">
+
+        <label for="expirationTime">Expiration Time</label>
+        <input type="datetime-local" id="expirationTime" name="expirationTime" required>
+
+        <button type="submit">Publish</button>
+    </form>
+
+    <!-- Link will be displayed here after the bin is created -->
+    <div class="link-container" th:if="${binLink != null}">
+        <p>Your bin has been created: <a th:href="@{${binLink}}" th:text="${binLink}"></a></p>
+    </div>
+</div>
+
+</body>
+</html>

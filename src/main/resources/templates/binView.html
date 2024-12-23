@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonbin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #121212;
+            color: #eaeaea;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            background-color: #1e1e1e;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+            color: #fff;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .bin-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: left;
+        }
+
+        .expiration {
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .btn-back {
+            padding: 10px 20px;
+            background-color: rgba(106, 17, 203, 0.8); /* Usando o mesmo tom roxo com opacidade */
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease; /* Adiciona a transição suave da cor */
+        }
+
+        .btn-back:hover {
+            background-color: rgb(106, 17, 203); /* Cor sólida ao passar o mouse */
+        }
+
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            p, .expiration {
+                font-size: 14px;
+            }
+
+            .btn-back {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Anonbin</h1>
+</header>
+
+<div class="container">
+    <!-- Exibir erro, se houver -->
+    <div th:if="${error != null}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Exibir conteúdo da bin -->
+    <div th:if="${bin != null}">
+        <h2 th:text="${bin.title}"></h2>
+        <div class="bin-content">
+            <p th:text="${bin.description}"></p>
+        </div>
+        <div class="expiration">
+            <p><strong>Expiration:</strong> <span th:text="${formattedExpirationTime}"></span></p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <button class="btn-back" onclick="window.location.href='/'">Back to Home</button>
+</footer>
+
+</body>
+</html>
